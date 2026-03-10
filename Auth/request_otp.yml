@@ -1,0 +1,121 @@
+info:
+  name: request_otp
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/auth/otp/request"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "mobile": "01909037017",
+        "role": "CUSTOMER" // CUSTOMER | PROVIDER
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: "var jsonData = res.getBody();\r
+
+        if (jsonData.data && jsonData.data.otp) {\r
+
+        \    bru.setEnvVar(\"otp\", jsonData.data.otp);\r
+
+        }"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+examples:
+  - name: example
+    request:
+      url: "{{baseUrl}}/auth/otp/request"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |
+          {
+            "mobile": "01909037017",
+            "role": "PROVIDER"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: content-security-policy
+          value: "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+        - name: cross-origin-opener-policy
+          value: same-origin
+        - name: cross-origin-resource-policy
+          value: same-origin
+        - name: origin-agent-cluster
+          value: ?1
+        - name: referrer-policy
+          value: no-referrer
+        - name: strict-transport-security
+          value: max-age=31536000; includeSubDomains
+        - name: x-content-type-options
+          value: nosniff
+        - name: x-dns-prefetch-control
+          value: off
+        - name: x-download-options
+          value: noopen
+        - name: x-frame-options
+          value: SAMEORIGIN
+        - name: x-permitted-cross-domain-policies
+          value: none
+        - name: x-xss-protection
+          value: "0"
+        - name: vary
+          value: Origin
+        - name: access-control-allow-credentials
+          value: "true"
+        - name: x-request-id
+          value: f86a8d46-f574-441a-9150-1cc0dffd8124
+        - name: ratelimit-policy
+          value: 5;w=900
+        - name: ratelimit-limit
+          value: "5"
+        - name: ratelimit-remaining
+          value: "4"
+        - name: ratelimit-reset
+          value: "900"
+        - name: content-type
+          value: application/json; charset=utf-8
+        - name: content-length
+          value: "107"
+        - name: etag
+          value: W/"6b-IY+INiYTsLBsLGS4f+HKDsSOBe0"
+        - name: date
+          value: Sun, 08 Mar 2026 04:25:06 GMT
+        - name: connection
+          value: keep-alive
+        - name: keep-alive
+          value: timeout=5
+      body:
+        type: json
+        data: |-
+          {
+            "success": true,
+            "statusCode": 200,
+            "message": "OTP sent successfully",
+            "data": {
+              "otp": "363438",
+              "expiresIn": 300
+            }
+          }
+
+docs: |
+  I have not implemented any sms getway right now, so I am sending otp in response. But after implementation any sms getway, I will not send otp in response.

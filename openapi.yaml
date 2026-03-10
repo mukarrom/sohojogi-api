@@ -1,0 +1,231 @@
+openapi: 3.0.0
+info:
+  title: openapi
+  version: 1.0.0
+paths:
+  /health:
+    get:
+      summary: Health Check
+      operationId: home_mukarrom_work_projects_sohojogi-api_health_check_health_check_yml
+      description: ''
+      tags:
+        - Health Check
+      responses:
+        '200':
+          description: ''
+  /api/v1/auth/token/refresh:
+    post:
+      summary: Refresh Token
+      operationId: home_mukarrom_work_projects_sohojogi-api_auth_refresh_token_yml
+      description: ''
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/refresh_token'
+  /api/v1/auth/logout:
+    post:
+      summary: Logout
+      operationId: home_mukarrom_work_projects_sohojogi-api_auth_logout_yml
+      description: ''
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/logout'
+      security:
+        - logout: []
+  /api/v1/auth/otp/request:
+    post:
+      summary: request_otp
+      operationId: home_mukarrom_work_projects_sohojogi-api_auth_request_otp_yml
+      description: >
+        I have not implemented any sms getway right now, so I am sending otp in
+        response. But after implementation any sms getway, I will not send otp
+        in response.
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      otp:
+                        type: string
+                      expiresIn:
+                        type: number
+              example:
+                success: true
+                statusCode: 200
+                message: OTP sent successfully
+                data:
+                  otp: '363438'
+                  expiresIn: 300
+      parameters:
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/request_otp'
+  /api/v1/auth/otp/verify:
+    post:
+      summary: Verify OTP
+      operationId: home_mukarrom_work_projects_sohojogi-api_auth_verify_otp_yml
+      description: ''
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      refreshToken:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          mobile:
+                            type: string
+                          role:
+                            type: string
+                          fullName:
+                            type: string
+                          avatarUrl:
+                            type: string
+                          isNewUser:
+                            type: boolean
+              example:
+                success: true
+                statusCode: 200
+                message: Authentication successful
+                data:
+                  accessToken: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWE5MjBhMDAzYzkxZDhiNWU2NWNmNTciLCJyb2xlIjoiUFJPVklERVIiLCJpYXQiOjE3NzI2OTE2MTYsImV4cCI6MTc3Mzk4NzYxNn0.ssDXTEnzgg60JwGsV9usUxBqQWxCnpMyffAQgvckmSk
+                  refreshToken: >-
+                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWE5MjBhMDAzYzkxZDhiNWU2NWNmNTciLCJyb2xlIjoiUFJPVklERVIiLCJpYXQiOjE3NzI2OTE2MTYsImV4cCI6MTc3Nzg3NTYxNn0.CW1yyqR3jwbqFACp67AAfvhu0pavL3vRR7QyMDYyJt8
+                  user:
+                    _id: 69a920a003c91d8b5e65cf57
+                    mobile: '01700000002'
+                    role: PROVIDER
+                    fullName: ''
+                    avatarUrl: ''
+                    isNewUser: true
+      parameters:
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: application/json
+      requestBody:
+        $ref: '#/components/requestBodies/verify_otp'
+servers:
+  - url: https://server.sohojogi.com.bd
+components:
+  schemas:
+    refresh_token:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+    logout:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+    request_otp:
+      type: object
+      properties: {}
+    verify_otp:
+      type: object
+      properties:
+        mobile:
+          type: string
+        otp:
+          type: string
+  requestBodies:
+    refresh_token:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/refresh_token'
+      description: ''
+      required: true
+    logout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/logout'
+      description: ''
+      required: true
+    request_otp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/request_otp'
+      description: ''
+      required: true
+    verify_otp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/verify_otp'
+      description: ''
+      required: true
+  securitySchemes:
+    logout:
+      type: http
+      scheme: bearer
