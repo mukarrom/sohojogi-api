@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sohojogi-api - API Documentation</title>
+    <style>
+        body { margin: 0; padding: 0; }
+        #opencollection-container { width: 100vw; height: 100vh; }
+    </style>
+    <link rel="stylesheet" href="https://cdn.opencollection.com/docs.css">
+    <script src="https://cdn.opencollection.com/docs.js"></script>
+</head>
+<body>
+    <div id="opencollection-container"></div>
+    <script>
+        const collectionData = "opencollection: 1.0.0\ninfo:\n  name: sohojogi-api\nconfig:\n  proxy:\n    inherit: true\n    config:\n      protocol: http\n      hostname: ''\n      port: ''\n      auth:\n        username: ''\n        password: ''\n      bypassProxy: ''\nitems:\n  - info:\n      name: Health Check\n      type: folder\n      seq: 1\n    request:\n      auth: inherit\n    items:\n      - info:\n          name: Health Check\n          type: http\n          seq: 1\n        http:\n          method: GET\n          url: https://server.sohojogi.com.bd/health\n          auth: inherit\n        runtime:\n          scripts:\n            - type: after-response\n              code: |-\n                const data = res.getBody();\n\n                if (data.token) {\n                  // Sets the token as a collection variable\n                  bru.setCollectionVar(\"helth\", data.timestamp);\n                  console.log(\"time stamp set\");\n                }\n        settings:\n          encodeUrl: true\n          timeout: 0\n          followRedirects: true\n          maxRedirects: 5\nbundled: true\nextensions:\n  bruno:\n    ignore:\n      - node_modules\n      - .git\n    exportedAt: '2026-03-10T04:40:15.536Z'\n    exportedUsing: Bruno/3.1.4\n";
+        new window.OpenCollection({
+            target: document.getElementById('opencollection-container'),
+            opencollection: collectionData,
+            theme: 'light'
+        });
+    </script>
+</body>
+</html>
