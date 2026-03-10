@@ -1,11 +1,11 @@
 info:
-  name: Verify OTP
+  name: Update Profile
   type: http
   seq: 2
 
 http:
-  method: POST
-  url: "{{baseUrl}}/auth/otp/verify"
+  method: PATCH
+  url: "{{baseUrl}}/users/me"
   headers:
     - name: Content-Type
       value: application/json
@@ -13,23 +13,11 @@ http:
     type: json
     data: |
       {
-        "mobile": "01512345678",
-        "otp": "298163"
+        "fullName": "Admin Bhai"
       }
-  auth: inherit
-
-runtime:
-  scripts:
-    - type: after-response
-      code: |-
-        let data = res.getBody();
-
-        // if (data.data && data.data.accessToken) {
-          bru.setEnvVar('accessToken', data.data.accessToken);
-        // }
-        // if (data.data && data.data.refreshToken) {
-          bru.setEnvVar('refreshToken', data.data.refreshToken);
-        // }
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
 
 settings:
   encodeUrl: true
@@ -38,10 +26,10 @@ settings:
   maxRedirects: 5
 
 examples:
-  - name: Verify OTP
+  - name: Update Profile
     request:
-      url: "{{baseUrl}}/auth/otp/verify"
-      method: POST
+      url: "{{baseUrl}}/users/me"
+      method: PATCH
       headers:
         - name: Content-Type
           value: application/json
@@ -49,8 +37,7 @@ examples:
         type: json
         data: |
           {
-            "mobile": "{{providerMobile}}",
-            "otp": "{{otp}}"
+            "fullName": "Admin Bhai"
           }
     response:
       statusText: "200"
@@ -84,23 +71,23 @@ examples:
         - name: Access-Control-Allow-Credentials
           value: "true"
         - name: X-Request-Id
-          value: 4e02f1dc-a1c1-457b-ab21-e96280d20a81
+          value: 356ed307-8600-4c3a-b872-49fa772418a6
         - name: RateLimit-Policy
-          value: 5;w=900
+          value: 100;w=900
         - name: RateLimit-Limit
-          value: "5"
+          value: "100"
         - name: RateLimit-Remaining
-          value: "3"
+          value: "91"
         - name: RateLimit-Reset
-          value: "876"
+          value: "389"
         - name: Content-Type
           value: application/json; charset=utf-8
         - name: Content-Length
-          value: "636"
+          value: "360"
         - name: ETag
-          value: W/"27c-x3K06Y/EVAWL1HR+t3DJ7Wn/1Ac"
+          value: W/"168-DVVJpVS2wVZrlSvakK7dfDTw9E8"
         - name: Date
-          value: Thu, 05 Mar 2026 06:20:16 GMT
+          value: Thu, 05 Mar 2026 05:01:53 GMT
         - name: Connection
           value: keep-alive
         - name: Keep-Alive
@@ -111,17 +98,17 @@ examples:
           {
               "success": true,
               "statusCode": 200,
-              "message": "Authentication successful",
+              "message": "Profile updated successfully",
               "data": {
-                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWE5MjBhMDAzYzkxZDhiNWU2NWNmNTciLCJyb2xlIjoiUFJPVklERVIiLCJpYXQiOjE3NzI2OTE2MTYsImV4cCI6MTc3Mzk4NzYxNn0.ssDXTEnzgg60JwGsV9usUxBqQWxCnpMyffAQgvckmSk",
-                  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWE5MjBhMDAzYzkxZDhiNWU2NWNmNTciLCJyb2xlIjoiUFJPVklERVIiLCJpYXQiOjE3NzI2OTE2MTYsImV4cCI6MTc3Nzg3NTYxNn0.CW1yyqR3jwbqFACp67AAfvhu0pavL3vRR7QyMDYyJt8",
-                  "user": {
-                      "_id": "69a920a003c91d8b5e65cf57",
-                      "mobile": "01700000002",
-                      "role": "PROVIDER",
-                      "fullName": "",
-                      "avatarUrl": "",
-                      "isNewUser": true
-                  }
+                  "_id": "69a9072d347e4d6c0e4552e3",
+                  "mobile": "01700000003",
+                  "role": "ADMIN",
+                  "fullName": "Admin Bhai",
+                  "avatarUrl": "",
+                  "isActive": true,
+                  "lastLoginAt": "2026-03-05T04:31:41.977Z",
+                  "createdAt": "2026-03-05T04:31:41.924Z",
+                  "updatedAt": "2026-03-05T05:01:53.323Z",
+                  "id": "69a9072d347e4d6c0e4552e3"
               }
           }

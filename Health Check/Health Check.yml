@@ -13,12 +13,13 @@ runtime:
     - type: after-response
       code: |-
         const data = res.getBody();
+        bru.setEnvVar("test","success");
 
-        if (data.token) {
-          // Sets the token as a collection variable
-          bru.setCollectionVar("helth", data.timestamp);
-          console.log("time stamp set");
-        }
+        // if (data.token) {
+        //   // Sets the token as a collection variable
+        //   bru.setCollectionVar("helth", data.timestamp);
+        //   console.log("time stamp set");
+        // }
 
 settings:
   encodeUrl: true

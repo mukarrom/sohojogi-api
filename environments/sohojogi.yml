@@ -1,0 +1,4 @@
+name: sohojogi
+variables:
+  - name: baseUrl
+    value: https://server.sohojogi.com.bd/api/v1
