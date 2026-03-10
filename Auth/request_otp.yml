@@ -14,7 +14,7 @@ http:
     data: |
       {
         "mobile": "01909037017",
-        "role": "CUSTOMER" // CUSTOMER | PROVIDER
+        "role": "CUSTOMER"
       }
   auth: inherit
 
