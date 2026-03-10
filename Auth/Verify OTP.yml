@@ -13,8 +13,8 @@ http:
     type: json
     data: |
       {
-        "mobile": "01909037016",
-        "otp": "{{otp}}"
+        "mobile": "01512345678",
+        "otp": "790631"
       }
   auth: inherit
 
@@ -25,10 +25,10 @@ runtime:
         var jsonData = res.getBody();
 
         if (jsonData.data && jsonData.data.accessToken) {
-            bru.setEnvVar('accessToken', jsonData.data.accessToken);
+            bru.setVar('accessToken', jsonData.data.accessToken);
         }
         if (jsonData.data && jsonData.data.refreshToken) {
-            bru.setEnvVar('refreshToken', jsonData.data.refreshToken);
+            bru.setVar('refreshToken', jsonData.data.refreshToken);
         }
 
 settings:

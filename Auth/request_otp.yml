@@ -13,7 +13,7 @@ http:
     type: json
     data: |
       {
-        "mobile": "01909037017",
+        "mobile": "01512345678",
         "role": "CUSTOMER"
       }
   auth: inherit
