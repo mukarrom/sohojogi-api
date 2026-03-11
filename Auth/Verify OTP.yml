@@ -14,7 +14,7 @@ http:
     data: |
       {
         "mobile": "01512345678",
-        "otp": "298163"
+        "otp": "496684"
       }
   auth: inherit
 

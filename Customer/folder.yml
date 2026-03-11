@@ -1,0 +1,11 @@
+info:
+  name: Customer
+  type: folder
+  seq: 4
+
+request:
+  auth: inherit
+
+docs:
+  content: Customer profile endpoints. All require authentication + CUSTOMER role.
+  type: text/markdown

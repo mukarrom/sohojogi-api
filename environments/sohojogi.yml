@@ -2,3 +2,13 @@ name: sohojogi
 variables:
   - name: baseUrl
     value: https://server.sohojogi.com.bd/api/v1
+    disabled: true
+  - name: baseUrl
+    value: http://localhost:5000/api/v1
+    disabled: true
+  - name: otp
+    value: "496684"
+  - name: accessToken
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWFmYzBhMTgzZDhkZTNlMmIyNWNjZmQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3NzMyMzAzNTEsImV4cCI6MTc3NDUyNjM1MX0.kXivL_bGdfQ-hj9TFzgvJGK-jrLIG6uogNj6L053vnk
+  - name: refreshToken
+    value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWFmYzBhMTgzZDhkZTNlMmIyNWNjZmQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3NzMyMzAzNTEsImV4cCI6MTc3ODQxNDM1MX0.LaORMqKHH5zLBhAVBmVYL3ZoHTZMB1WZMPZfB2zg9LQ

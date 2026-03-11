@@ -1,0 +1,39 @@
+info:
+  name: Update Customer Profile
+  type: http
+  seq: 2
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/customer/profile"
+  body:
+    type: multipart-form
+    data:
+      - name: avatar
+        type: file
+        value:
+          - /home/mukarrom/Pictures/Screenshots/Screenshot from 2026-03-10 11-02-54.png
+        disabled: true
+      - name: fullName
+        type: text
+        value: Mukarrom Hosain
+      - name: email
+        type: text
+        value: mukarrom@example.com
+      - name: pushNotificationEnabled
+        type: text
+        value: "false"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWFmYzBhMTgzZDhkZTNlMmIyNWNjZmQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3NzMyMzAzNTEsImV4cCI6MTc3NDUyNjM1MX0.kXivL_bGdfQ-hj9TFzgvJGK-jrLIG6uogNj6L053vnk
+
+runtime:
+  variables:
+    - name: customerToken
+      value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWE2NWY0Njg4MWE3MzBkYzM5MWRmNDAiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3NzI1MTEwNDYsImV4cCI6MTc3MzExNTg0Nn0.gw9RNhKgSqlxOZ8hrC2X8XaJJ4SosGaByrvMAlpoaD0
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

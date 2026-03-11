@@ -1,0 +1,30 @@
+info:
+  name: Change Customer Status (Admin)
+  type: http
+  seq: 5
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/customer/{{customerId}}/change-status"
+  headers:
+    - name: Content-Type
+      value: application/json
+  params:
+    - name: customerId
+      value: "{{customerId}}"
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "isActive": false
+      }
+  auth:
+    type: bearer
+    token: "{{accessToken}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

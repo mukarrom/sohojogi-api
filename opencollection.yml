@@ -21,6 +21,9 @@ request:
   variables:
     - name: baseUrl
       value: https://server.sohojogi.com.bd/api/v1
+    - name: baseUrl
+      value: http://localhost:5000/api/v1
+      disabled: true
 bundled: false
 extensions:
   bruno:
